@@ -30,6 +30,7 @@ public class WWWManager : MonoBehaviour {
 			//接続成功
 			if(func != null)
 			{
+				Debug.Log("WWW:" + www.text);
 				var jsonData = MiniJSON.Json.Deserialize (www.text) as Dictionary<string,object>;
 				func(jsonData);
 			}

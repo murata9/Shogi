@@ -21,6 +21,7 @@ public class define : MonoBehaviour {
 	public const string GuideTag = "GuideTag";//移動ガイド
 	public const string LastMoverTag = "LastMover";//最後に移動した駒のガイド
 	public const string RoomListTag = "RoomListTag";//部屋一覧に表示されるボタン
+	public const string ChatLogTag = "ChatLogTag";//チャットテキスト用タグ
 
 	// Use this for initialization
 	void Start () {

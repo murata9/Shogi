@@ -30,7 +30,7 @@ public class login_button : MonoBehaviour {
 		//ゲーム画面へ移行
 		Application.LoadLevel ("game_scene");
 	}
-	//ボタンが押された時の処理
+	//ログインボタンが押された時の処理
 	public void PushButtonLogin () {
 		//ログイン
 		WWWForm form = new WWWForm ();
