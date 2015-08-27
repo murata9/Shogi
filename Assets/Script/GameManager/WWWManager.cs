@@ -9,7 +9,9 @@ public class WWWManager : MonoBehaviour {
 	private static WWWManager inst;//インスタンス
 	// Use this for initialization
 	void Start () {
-		inst = this;//作成時にインスタンスをスタティック変数に保持
+		if (inst == null) {
+			inst = this;//作成時にインスタンスをスタティック変数に保持
+		}
 		DontDestroyOnLoad (this.gameObject);
 	}
 	//インスタンスの取得

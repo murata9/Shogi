@@ -1348,7 +1348,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 17c7963125ffcd1418ab52f98770d60f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ScrollViewPanel: {fileID: 924875688}
+  ScrollViewContent: {fileID: 924875688}
 --- !u!4 &1478014372
 Transform:
   m_ObjectHideFlags: 0
@@ -1554,7 +1554,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Content: {fileID: 924875689}
-  m_Horizontal: 1
+  m_Horizontal: 0
   m_Vertical: 1
   m_MovementType: 1
   m_Elasticity: .100000001

@@ -58,6 +58,8 @@ public class PieceBase : MonoBehaviour {
 			tx--;
 			ty-=5;
 		}
+		ty += 1;
+		Debug.Log ("ty" + ty);
 		//相手の持ち駒は反対の位置に置く
 		if (enemy_flag == false && GameManager.GetInstance().first_player_flag == true) {
 			tx = BoardManager.ReversePosX(tx);

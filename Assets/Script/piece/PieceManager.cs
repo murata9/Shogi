@@ -208,11 +208,11 @@ public class PieceManager : MonoBehaviour {
 			HavePiecesList.Clear();
 			HavePiecesListEnemy.Clear();
 			Guide.AllDeleteFromTag(define.LastMoverTag);//最後に移動した駒表示ガイドを削除
+			bool create_flag = false;
 			//各駒の情報
 			for(int i = 0; i < define.PieceNum; i++)
 			{
 				var jsonOnePieceData = (Dictionary<string,object>)jsonAllPieceData[(i + 1).ToString()];
-				bool create_flag = false;
 				if(PiecesArrayID[i] == null)//初めて呼ばれた時は作成する
 				{
 					GameObject piece = CreatePiece();
@@ -295,7 +295,12 @@ public class PieceManager : MonoBehaviour {
 			CheckOhte();
 			Guide.AllGuideDelete ();//ガイド削除
 			//持ち駒を並べる
-			UpdateHavePiece(false);
+			if(create_flag == true){
+				//最初はアニメーション移動あり 観戦者用
+				UpdateHavePiece(true);
+			} else {
+				UpdateHavePiece(false);
+			}
 			//盤
 			if(GameManager.GetInstance().first_player_flag == false)
 			{

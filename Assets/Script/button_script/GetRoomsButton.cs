@@ -88,7 +88,6 @@ public class GetRoomsButton : MonoBehaviour {
 	{
 		//部屋一覧をリセット
 		Guide.AllDeleteFromTag (define.RoomListTag);
-		int room_num = System.Convert.ToInt32(jsonData["room_num"]);
 		var jsonAllRoomsData = (Dictionary<string,object>)jsonData["room_data"];//取得した全部屋のDictionary
 		//ソート
 		//SortedDictionary<string,int> (new Comparer() )を使う？

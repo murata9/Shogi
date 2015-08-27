@@ -7,7 +7,7 @@ using UnityEngine.Events;
 //チャット管理
 public class ChatManager : MonoBehaviour {
 	GameObject ChatNodePrefab;//チャットテキストのプレハブ
-	public GameObject ScrollViewPanel;//クローンの親にするためのパネル
+	public GameObject ScrollViewContent;//クローンの親にするためのパネル
 	List<string> chat_log_list = new List<string>();
 	float last_update_time;
 	// Use this for initialization
@@ -19,7 +19,6 @@ public class ChatManager : MonoBehaviour {
 	void Update () {
 		//Time.time Unityの計測している時間 秒単位のfloat値
 		if (last_update_time + 1.0f < Time.time ) {
-			Debug.Log (Time.time);
 			GetChatLog();
 			last_update_time = Time.time;
 		}
@@ -46,7 +45,7 @@ public class ChatManager : MonoBehaviour {
 		if (chat_log_list.Count != chat_num) {
 			//内容が更新された
 			Debug.Log("UpdateChat");
-			chat_log_list.Clear();
+			//chat_log_list.Clear();
 			string comment = null;
 			for(int i = chat_log_list.Count; i < chat_num; i++)
 			{
@@ -57,6 +56,10 @@ public class ChatManager : MonoBehaviour {
 				//ノード作成
 				CreateChatNode(comment);
 			}
+			//スクロールさせる
+			Vector3 scroll_pos = ScrollViewContent.transform.position;
+			scroll_pos.y = 100;
+			ScrollViewContent.transform.position = scroll_pos;
 		}
 	}
 	//チャットテキストをプレハブから作成
@@ -67,7 +70,7 @@ public class ChatManager : MonoBehaviour {
 		}
 		var obj = Instantiate(ChatNodePrefab) as GameObject;
 		//スクロールビューに表示するパネルを親に設定
-		obj.transform.SetParent(ScrollViewPanel.transform);
+		obj.transform.SetParent(ScrollViewContent.transform);
 		obj.transform.localPosition = new Vector3 (0, 0, 1);//位置はUIのElementから設定される
 		obj.transform.localScale = new Vector3 (1, 1, 1);
 		Text node_text = obj.GetComponentInChildren<Text> ();
