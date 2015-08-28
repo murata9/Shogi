@@ -31,7 +31,7 @@ public class ChatManager : MonoBehaviour {
 			loginDataManager.play_id = 1;
 			loginDataManager.user_id = 1;
 		}
-		string url = define.MyServerURL + "plays/" + loginDataManager.play_id + "/chat_get";
+		string url = define.MyServerURL + "chats/" + loginDataManager.play_id + "/chat_get";
 		WWW www = new WWW (url);
 		WWWManager.GetInstance ().ConnectWWW (www, ReceiveChatLog);
 	}
@@ -56,12 +56,35 @@ public class ChatManager : MonoBehaviour {
 				//ノード作成
 				CreateChatNode(comment);
 			}
-			//スクロールさせる
-			Vector3 scroll_pos = ScrollViewContent.transform.position;
-			scroll_pos.y = 100;
-			ScrollViewContent.transform.position = scroll_pos;
+			//スクロール
+			StartCoroutine(Scroll(chat_num));
 		}
 	}
+	IEnumerator Scroll(int chat_num){
+		yield return 5;//待機
+		//スクロールさせる
+		for (int i=0; i<100; i++) {
+			Vector3 scroll_pos = ScrollViewContent.transform.localPosition;
+			scroll_pos.y = 24;
+			int scroll_num = chat_num - 3;//チャット数が３を超えたらスクロールさせる
+			if (scroll_num > 0) {
+				const int node_height = 18;
+				scroll_pos.y += node_height * scroll_num;
+			}
+			Debug.Log ("scroll_pos_y:" + scroll_pos.y);
+			Vector3 old_pos = ScrollViewContent.transform.localPosition;
+			Vector3 move_vec = scroll_pos - old_pos;
+			ScrollViewContent.transform.localPosition += move_vec * 0.5f;
+			Debug.Log ("move_vec:" + move_vec);
+			if(move_vec.y < 0.5f){
+				//十分にスクロールした
+				ScrollViewContent.transform.localPosition = scroll_pos;
+				yield break;
+			}
+			yield return 10;
+		}
+	}
+
 	//チャットテキストをプレハブから作成
 	public GameObject CreateChatNode(string comment)
 	{
