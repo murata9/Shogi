@@ -12,11 +12,11 @@ public class ChatSendButton : MonoBehaviour {
 	//チャット送信ボタンが押された時の処理
 	public void PushButtonSendChat () {
 		if (ChatInputField.text == "") {
-			Debug.LogError("chat null");
+			Debug.LogError ("chat null");
 			return;
 		}
 		if (loginDataManager.login_flag == false) {
-			Debug.LogError("Must Login");
+			Debug.LogError ("Must Login");
 			return;
 		}
 		WWWForm form = new WWWForm ();
@@ -25,12 +25,12 @@ public class ChatSendButton : MonoBehaviour {
 		//utf-8に変換する
 		string comment = ChatInputField.text;
 		//comment = StringExtensions.ToUtf8(comment);
-		form.AddField ("comment", comment, Encoding.GetEncoding("utf-8"));
+		form.AddField ("comment", comment, Encoding.GetEncoding ("utf-8"));
 		Debug.Log (comment);
 		//発言送信
 		string url = define.MyServerURL + "chats/chat_post";
 		WWW www = new WWW (url, form);
-		WWWManager.GetInstance().ConnectWWW(www, ReceiveChat);
+		WWWManager.GetInstance ().ConnectWWW (www, ReceiveChat);
 		//入力欄を空にする
 		ChatInputField.text = "";
 	}

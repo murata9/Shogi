@@ -9,10 +9,10 @@ public class ChatManager : MonoBehaviour {
 	GameObject ChatNodePrefab;//チャットテキストのプレハブ
 	public GameObject ScrollViewContent;//クローンの親にするためのパネル
 	List<string> chat_log_list = new List<string>();
-	float last_update_time;
+	float last_update_time;//最後に更新したtime 1秒ごとに更新
 	// Use this for initialization
 	void Start () {
-		last_update_time = 0;
+		last_update_time = Time.time;
 	}
 	
 	// Update is called once per frame
@@ -61,11 +61,11 @@ public class ChatManager : MonoBehaviour {
 		}
 	}
 	IEnumerator Scroll(int chat_num){
-		yield return 5;//待機
+		yield return new WaitForSeconds (0.1f);//待機
 		//スクロールさせる
 		for (int i=0; i<100; i++) {
 			Vector3 scroll_pos = ScrollViewContent.transform.localPosition;
-			scroll_pos.y = 24;
+			scroll_pos.y = 28;
 			int scroll_num = chat_num - 3;//チャット数が３を超えたらスクロールさせる
 			if (scroll_num > 0) {
 				const int node_height = 18;
@@ -78,10 +78,11 @@ public class ChatManager : MonoBehaviour {
 			Debug.Log ("move_vec:" + move_vec);
 			if(move_vec.y < 0.5f){
 				//十分にスクロールした
+				Debug.Log ("EndScroll_scroll_pos:" + scroll_pos);
 				ScrollViewContent.transform.localPosition = scroll_pos;
 				yield break;
 			}
-			yield return 10;
+			yield return new WaitForSeconds (0.1f);//待機
 		}
 	}
 
