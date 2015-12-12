@@ -11,6 +11,7 @@ public class login_button : MonoBehaviour {
 	//Unityで設定
 	public InputField inputFieldName;//名前入力欄
 	public InputField inputFieldRoomNo;//部屋番号入力欄
+	public InputField inputFieldURL;//URL入力欄
 	//WWWManagerで接続成功後のデータを受け取る関数
 	//ログイン
 	void ReceiveLogin(Dictionary<string,object> jsonData)
@@ -32,6 +33,9 @@ public class login_button : MonoBehaviour {
 	}
 	//ログインボタンが押された時の処理
 	public void PushButtonLogin () {
+		if (inputFieldURL.text != null && inputFieldURL.text != string.Empty) {
+			define.ChangeURL (inputFieldURL.text);
+		}
 		//ログイン
 		WWWForm form = new WWWForm ();
 		int room_no = int.Parse(inputFieldRoomNo.text);

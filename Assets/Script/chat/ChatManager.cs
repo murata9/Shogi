@@ -67,10 +67,9 @@ public class ChatManager : MonoBehaviour {
 			Vector3 scroll_pos = ScrollViewContent.transform.localPosition;
 			scroll_pos.y = 28;
 			int scroll_num = chat_num - 3;//チャット数が３を超えたらスクロールさせる
-			if (scroll_num > 0) {
-				const int node_height = 18;
-				scroll_pos.y += node_height * scroll_num;
-			}
+			if (scroll_num <= 0) break;
+			const int node_height = 18;
+			scroll_pos.y += node_height * scroll_num;
 			Debug.Log ("scroll_pos_y:" + scroll_pos.y);
 			Vector3 old_pos = ScrollViewContent.transform.localPosition;
 			Vector3 move_vec = scroll_pos - old_pos;
@@ -79,10 +78,10 @@ public class ChatManager : MonoBehaviour {
 			if(move_vec.y < 0.5f){
 				//十分にスクロールした
 				Debug.Log ("EndScroll_scroll_pos:" + scroll_pos);
-				ScrollViewContent.transform.localPosition = scroll_pos;
 				yield break;
 			}
 			yield return new WaitForSeconds (0.1f);//待機
+			ScrollViewContent.transform.localPosition = scroll_pos;
 		}
 	}
 

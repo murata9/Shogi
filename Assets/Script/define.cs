@@ -4,8 +4,14 @@ using System.Collections;
 public class define : MonoBehaviour {
 	//定数
 	public const int room_no = 101;//部屋番号101~200
-	public const string URL = "http://192.168.3.83:3000/";//将棋サーバのアドレス
-	public const string MyServerURL = "http://192.168.3.83:3009/";//自分のサーバのアドレス 対戦可能な部屋の取得に使用
+	public static string URL = "http://192.168.3.83:3000/";//将棋サーバのアドレス
+	public static string MyServerURL = "http://192.168.3.83:3009/";//チャットサーバのアドレス 対戦可能な部屋の取得にも使用
+	// ログイン時にURLを指定する
+	public static void ChangeURL(string newUrl)
+	{
+		URL = newUrl;
+		MyServerURL = newUrl;
+	}
 	//駒
 	public const int PieceNum = 40;//駒の数
 	//将棋盤
@@ -25,7 +31,8 @@ public class define : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-	
+		//シーンを切り替えても破棄されないようにする
+		DontDestroyOnLoad (this);
 	}
 	
 	// Update is called once per frame

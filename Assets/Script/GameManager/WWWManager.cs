@@ -28,6 +28,7 @@ public class WWWManager : MonoBehaviour {
 		yield return www;
 		if (www.error != null) {
 			Debug.Log ("Error!" + www.error);
+			Debug.Log ("Error!" + www.url);
 		} else {
 			//接続成功
 			if(func != null)

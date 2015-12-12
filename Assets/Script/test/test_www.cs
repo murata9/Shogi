@@ -8,7 +8,7 @@ public class test_www : MonoBehaviour {
 	public GameObject sphere;
 	// Use this for initialization
 	void Start () {
-		StartCoroutine (Download());
+		//StartCoroutine (Download());
 		//StartCoroutine (Post());
 	}
 
